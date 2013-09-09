@@ -3,7 +3,7 @@
 Plugin Name: anyLink
 Plugin URI: http://dudo.org/
 Description: anyLink是一款外部链接管理工具。它可以帮你把网站中指向外部的链接以“内部链接”的形式封装。这既可以规避搜索引擎对淘宝客类网站的识别，也可以防止网站权重对外传递，有利于网站SEO。
-Version: 1.0
+Version: 0.1
 Author: dudo
 Author URI: http://dudo.org/
 License: GPL2 or later
