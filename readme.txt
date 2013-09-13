@@ -32,7 +32,6 @@ Once Anylink is installed in your wordpress, you need running scan for the first
 external links.
 
 == Screenshots ==
-1. In the setting page you can set the STYLE of the slug and redirect type.
 
 == Installation ==
 
@@ -48,6 +47,11 @@ external links.
 *	Customise redirect http status code
 
 == Upgrade Notice ==
+
+=0.1.1=
+Fixed some bugs in v0.1
+Both English and Chinese languages are now supported
+POT file is supplied, so you can tranlate it into your own language as well
 
 =0.1=
 Main feature is developed.

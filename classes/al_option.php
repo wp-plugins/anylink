@@ -4,11 +4,11 @@ class al_option {
 	public function __construct() {
 		add_action( 'admin_menu', array( &$this, 'addMenu' ) );
 		add_action( 'admin_init', array( &$this, 'alAdminInit' ) );
-		add_action( 'updated_option', array( &$this, 'flushRules' ) );
+		add_action( 'updated_option_anylink_options', array( &$this, 'flushRules' ) );
 		$this -> anylinkOptions = get_option( 'anylink_options' );
 	}
 	public function addMenu() {
-		$al_option_page = add_submenu_page( 'options-general.php', 'anyLink插件配置', 'anyLink配置', 'manage_options', 'anyLinkSetting', array( &$this, 'anyLinkSettingPage' ) );
+		$al_option_page = add_submenu_page( 'options-general.php', __( 'anylink Settings', 'anylink' ), __( 'anylink Settings', 'anylink' ), 'manage_options', 'anyLinkSetting', array( &$this, 'anyLinkSettingPage' ) );
 		add_action( 'admin_print_scripts-' . $al_option_page, array( &$this, 'anylinkAdminScripts' ) );
 		add_action( 'admin_print_styles-' . $al_option_page, array( &$this, 'anylinkAdminScripts' ) );
 	}
@@ -27,19 +27,20 @@ class al_option {
 		wp_register_script( 'anylink_script', plugins_url( '/images/al_script.js', dirname( __FILE__ ) ) );
 		wp_register_style( 'anylink_style', plugins_url( '/images/al_style.css', dirname( __FILE__ ) ) );
 		register_setting( 'anylink_options_group', 'anylink_options', array( &$this, 'alCatValidate' ) );
-		add_settings_section( 'al_general_settings', '基本设置', array( &$this, 'alGeneralDisp' ), 'anyLinkSetting' );
-		add_settings_field( 'al_redirect_cat', '跳转目录名称', array( &$this, 'dispRedirectCat' ), 'anyLinkSetting', 'al_general_settings' );
-		add_settings_field( 'al_redirect_type', '链接跳转类型', array( &$this, 'dispRedirctType' ), 'anyLinkSetting', 'al_general_settings' );
-		add_settings_field( 'al_slug_num', '自动生产链接slug的长度', array( &$this, 'dispSlugNum' ), 'anyLinkSetting', 'al_general_settings' );
-		add_settings_field( 'al_slug_char', '自动生产链接slug的样式', array( &$this, 'dispSlugChar' ), 'anyLinkSetting', 'al_general_settings' );
+		add_settings_section( 'al_general_settings', __( 'General Settings', 'anylink'), array( &$this, 'alGeneralDisp' ), 'anyLinkSetting' );
+		add_settings_field( 'al_redirect_cat', __( 'Redirect catalog', 'anylink' ), array( &$this, 'dispRedirectCat' ), 'anyLinkSetting', 'al_general_settings' );
+		add_settings_field( 'al_redirect_type', __( 'Redirect HTTP code', 'anylink'), array( &$this, 'dispRedirctType' ), 'anyLinkSetting', 'al_general_settings' );
+		add_settings_field( 'al_slug_num', __( 'Length of slugs', 'anylink'), array( &$this, 'dispSlugNum' ), 'anyLinkSetting', 'al_general_settings' );
+		add_settings_field( 'al_slug_char', __( 'Component of slug', 'anylink' ), array( &$this, 'dispSlugChar' ), 'anyLinkSetting', 'al_general_settings' );
 		add_settings_field( 'al_form_identify', '', array( &$this, 'hiddenFormIdentify' ), 'anyLinkSetting', 'al_general_settings' );
+		load_plugin_textdomain( 'anylink', false, ANYLNK_PATH . '/i18n/' );
 	}
 	public function alGeneralDisp() {
 		echo "";
 	}
 	public function dispRedirectCat() {
 		$cat = $this -> anylinkOptions['redirectCat'];
-		echo site_url() . "/<input id='anylink_options' name='anylink_options[redirectCat]' value='{$cat}' class='small-text' type='text' size='8' />/ab12<br />请确保以字母开头，且仅含有字母、数字、下划线、连接符，最大长度不超过12个";
+		echo site_url() . "/<input id='anylink_options' name='anylink_options[redirectCat]' value='{$cat}' class='small-text' type='text' size='8' />/ab12<br />" . __( 'Make sure it starts with a letter, ONLY contains letters, numbers, underscore and dash. The max. length is 12', 'anylink' );
 	}
 	public function dispRedirctType() {
 		$type = ( int )$this -> anylinkOptions['redirectType'];
@@ -59,29 +60,29 @@ class al_option {
 				break;
 		}
 		$redirectType  = "<input type='radio' id='al_redirect_type_301' name='anylink_options[redirectType]' value='301' $checked301 />";
-		$redirectType .= "<label for='al_redirect_type_301'>301永久性转移</label><br />";
+		$redirectType .= "<label for='al_redirect_type_301'>" . __( '301 Moved Permanently', 'anylink' ) . "</label><br />";
 		$redirectType .= "<input type='radio' id='al_redirect_type_307' name='anylink_options[redirectType]' value='307' $checked307 />";
-		$redirectType .= "<label for='al_redirect_type_307'>307临时性转移</label><br />";
+		$redirectType .= "<label for='al_redirect_type_307'>" . __( '307 Temporary Redirect', 'anylink' ) . "</label><br />";
 		$redirectType .= "<input type='radio' id='al_redirect_type_200' name='anylink_options[redirectType]' value='200' $checked200 disabled='true' />";
-		$redirectType .= "<label for='al_redirect_type_200'>javascript中间页跳转</label><br />";		
+		$redirectType .= "<label for='al_redirect_type_200'>" . __( 'Redirect using Javascript on a single page', 'anylink' ) . "</label><br />";		
 		echo $redirectType;
 	}
 	public function dispSlugNum() {
 		$num = $this ->anylinkOptions['slugNum'];
-		echo "<input type='text' id='slugNum' name='anylink_options[slugNum]' value='{$num}' class='small-text' size='4' maxlength='2' /><br />最小值为4，最大值为12";
+		echo "<input type='text' id='slugNum' name='anylink_options[slugNum]' value='{$num}' class='small-text' size='4' maxlength='2' /><br />No less than 4 and no more than 12";
 	}
 	public function dispSlugChar() {
 		$chars = $this -> anylinkOptions['slugChar'];
 		$htmlChar  = "<input type='radio' id='slugCharNum' name='anylink_options[slugChar]' value='0' ";
 		$htmlChar .= $chars == 0 ? 'checked' : '';
-		$htmlChar .= " /><label for='slugCharNum'>纯数字</label><br />";
+		$htmlChar .= " /><label for='slugCharNum'>" . __( 'Pure digits', 'anylink' ) . "</label><br />";
 		$htmlChar .= "<input type='radio' id='slugCharChar' name='anylink_options[slugChar]' value='1' ";
 		$htmlChar .= $chars == 1 ? 'checked' : '';
-		$htmlChar .= " /><label for='slugCharChar'>纯字母</label><br />";
+		$htmlChar .= " /><label for='slugCharChar'>" . __( 'Pure alphabets', 'anylink' ) . "</label><br />";
 		$htmlChar .= "<input type='radio' id='slugCharNumchar' name='anylink_options[slugChar]' value='2' ";
 		$htmlChar .= $chars == 2 ? 'checked' : '';
-		$htmlChar .= " /><label for='slugCharNumchar'>字母与数字混合</label>";
-		$htmlChar .= "<br /><b>建议slug设置为4位字母与数字混合。单纯使用数字时长度最好设置为6位以上。</b>";
+		$htmlChar .= " /><label for='slugCharNumchar'>" . __( 'Digits and alphabets', 'anylink') . "</label>";
+		$htmlChar .= "<br /><b>" . __( 'Recommended setting is 4 digits and alphabets. If using PURE DIGITS please set the length no less than 6.', 'anylink' ) . "</b>";
 		echo $htmlChar;
 	}
 	/*  I should put some validations here

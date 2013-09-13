@@ -1,11 +1,11 @@
 <?php
 /*
 Plugin Name: anyLink
-Plugin URI: http://dudo.org/
-Description: anyLink是一款外部链接管理工具。它可以帮你把网站中指向外部的链接以“内部链接”的形式封装。这既可以规避搜索引擎对淘宝客类网站的识别，也可以防止网站权重对外传递，有利于网站SEO。
-Version: 0.1
+Plugin URI: http://dudo.org/anylink
+Description: anyLink is an external links management tool. It help you to covert all the external links in your posts into internal links automatically. It can prevent the website weight flow outside to others. It's absolutely SEO friendly.
+Version: 0.1.1
 Author: dudo
-Author URI: http://dudo.org/
+Author URI: http://dudo.org/about
 License: GPL2 or later
 */
 defined( 'ABSPATH' ) OR exit;
@@ -22,4 +22,5 @@ add_action( 'publish_post', array( &$covert, 'covertURLs' ) );
 add_filter( 'the_content',  array( &$filter, 'applyFilter' ) );
 add_filter('query_vars', array( &$filter, 'addQueryVars' ) );
 add_action( 'parse_request', array( &$filter, 'alter_the_query' ) );
+add_action( 'plugins_loaded', 'al_load_textdomain' );
 ?>

@@ -64,4 +64,8 @@ function anylnkInstall() {
 	add_rewrite_rule( "goto/([0-9a-z]{4,})", 'index.php?goto=$matches[1]', 'top' );
 	flush_rewrite_rules();
 }
+function al_load_textdomain() {
+	$pluginDir = basename( dirname( __FILE__ ) );
+	load_plugin_textdomain( 'anylink', false, $pluginDir . '/i18n/' );
+}
 ?>
