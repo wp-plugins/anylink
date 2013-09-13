@@ -1,0 +1,124 @@
+# Copyright (C) 2013 anyLink
+# This file is distributed under the same license as the anyLink package.
+msgid ""
+msgstr ""
+"Project-Id-Version: anyLink 0.1\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/anyLink\n"
+"POT-Creation-Date: 2013-09-10 13:19:27+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2013-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+
+#: al_setting.php:5 classes/al_option.php:11
+msgid "anylink Settings"
+msgstr ""
+
+#: al_setting.php:11 al_setting.php:19
+msgid "Establish Index"
+msgstr ""
+
+#: al_setting.php:14
+msgid "For the first time after you running anylink, you need indexing ALL posts. It'll let you establish index for the posts already in your Wordpress. For the newly publish or update post, index is done automatically. And you needn't do anything."
+msgstr ""
+
+#: al_setting.php:23
+msgid "Allows you to generate slugs manually. Keep in mind that please do not regenerate slugs unless you changed slug settings. Search engines may think that you have modified your articles."
+msgstr ""
+
+#: al_setting.php:23
+msgid "Note: It won't work unless slug settings are changed"
+msgstr ""
+
+#: al_setting.php:28
+msgid "Regenerate slugs"
+msgstr ""
+
+#: classes/al_option.php:22
+msgid "You do not have sufficient permissions to access this page."
+msgstr ""
+
+#: classes/al_option.php:30
+msgid "General Settings"
+msgstr ""
+
+#: classes/al_option.php:31
+msgid "Redirect catalog"
+msgstr ""
+
+#: classes/al_option.php:32
+msgid "Redirect HTTP code"
+msgstr ""
+
+#: classes/al_option.php:33
+msgid "Length of slugs"
+msgstr ""
+
+#: classes/al_option.php:34
+msgid "Component of slug"
+msgstr ""
+
+#: classes/al_option.php:42
+msgid "Make sure it starts with a letter, ONLY contains letters, numbers, underscore and dash. The max. length is 12"
+msgstr ""
+
+#: classes/al_option.php:62
+msgid "301 Moved Permanently"
+msgstr ""
+
+#: classes/al_option.php:64
+msgid "307 Temporary Redirect"
+msgstr ""
+
+#: classes/al_option.php:66
+msgid "Redirect using Javascript on a single page"
+msgstr ""
+
+#: classes/al_option.php:77
+msgid "Pure digits"
+msgstr ""
+
+#: classes/al_option.php:80
+msgid "Pure alphabets"
+msgstr ""
+
+#: classes/al_option.php:83
+msgid "Digits and alphabets"
+msgstr ""
+
+#: classes/al_option.php:84
+msgid "Recommended setting is 4 digits and alphabets. If using PURE DIGITS please set the length no less than 6."
+msgstr ""
+
+#: i18n/pomo/sample/app.php:56
+msgid "Welcome %s!"
+msgstr ""
+
+#: i18n/pomo/sample/app.php:60
+msgid "A string with low priority!"
+msgstr ""
+
+#: i18n/pomo/sample/app.php:62
+msgid "Bye\n"
+msgstr ""
+#. Plugin Name of the plugin/theme
+msgid "anyLink"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "http://dudo.org/anylink"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid "anyLink is an external links management tool. It help you to covert all the external links in your posts into internal links automatically. It can prevent the website weight flow outside to others. It's absolutely SEO friendly."
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "dudo"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "http://dudo.org/about"
+msgstr ""
