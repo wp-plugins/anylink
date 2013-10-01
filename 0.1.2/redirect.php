@@ -1,5 +1,12 @@
 <?php
-require_once( '../.../../wp-load.php' );
+function getLoadPage() {
+	$arrDir = explode( DIRECTORY_SEPARATOR, dirname(__FILE__) );
+	$arrLoadDir = array_chunk( $arrDir, count( $arrDir ) - 3 );
+	$loadDir = implode( DIRECTORY_SEPARATOR, $arrLoadDir[0] );
+	return $loadDir . DIRECTORY_SEPARATOR;
+}
+$loadDir = getLoadPage();
+require_once( $loadDir . 'wp-load.php' );
 require_once( dirname(__FILE__) . '/config.php' );
 require_once( ANYLNK_PATH . '/classes/al_covert.php' );
 require_once( ANYLNK_PATH . '/classes/al_filter.php' );
