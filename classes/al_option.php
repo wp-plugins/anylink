@@ -4,7 +4,7 @@ class al_option {
 	public function __construct() {
 		add_action( 'admin_menu', array( &$this, 'addMenu' ) );
 		add_action( 'admin_init', array( &$this, 'alAdminInit' ) );
-		add_action( 'updated_option_anylink_options', array( &$this, 'flushRules' ) );
+		add_action( 'update_option_anylink_options', array( $this, 'flushRules' ) );
 		$this -> anylinkOptions = get_option( 'anylink_options' );
 	}
 	public function addMenu() {
@@ -63,7 +63,7 @@ class al_option {
 		$redirectType .= "<label for='al_redirect_type_301'>" . __( '301 Moved Permanently', 'anylink' ) . "</label><br />";
 		$redirectType .= "<input type='radio' id='al_redirect_type_307' name='anylink_options[redirectType]' value='307' $checked307 />";
 		$redirectType .= "<label for='al_redirect_type_307'>" . __( '307 Temporary Redirect', 'anylink' ) . "</label><br />";
-		$redirectType .= "<input type='radio' id='al_redirect_type_200' name='anylink_options[redirectType]' value='200' $checked200 disabled='true' />";
+		$redirectType .= "<input type='radio' id='al_redirect_type_200' name='anylink_options[redirectType]' value='200' $checked200 />";
 		$redirectType .= "<label for='al_redirect_type_200'>" . __( 'Redirect using Javascript on a single page', 'anylink' ) . "</label><br />";		
 		echo $redirectType;
 	}
@@ -111,11 +111,23 @@ class al_option {
 	//flush the rewrite rules
 	public function flushRules() {
 		$alOptions = get_option( 'anylink_options' );
-		if( $alOptions['redirectCat'] != $alOptions['oldCat'] ) {
+		if( $alOptions['redirectCat'] != $alOptions['oldCat'] || $alOptions['redirectType'] != $alOptions['oldRedirectType'] ) {
 			$cat = $alOptions['redirectCat'];
-			add_rewrite_rule( "$cat/([0-9a-z]{4,})", 'index.php?' . $cat . '=$matches[1]', 'top' );
-			flush_rewrite_rules();
+			$type = $alOptions['redirectType'];
+			global $wp_rewrite;
+			if( $type == '200' ) {
+				/* get the relative path of redirect file */
+				$redirectFile = substr( plugins_url(), strlen( home_url() ) + 1 ) . '/' . ANYLNK_PLUGIN . '/redirect.php';
+				/* add an external rewrite rule which will  be written into .htaccess file */
+				$wp_rewrite -> add_external_rule( "$cat/([0-9a-z]{4,})",  $redirectFile . '?slug=$1' );
+				flush_rewrite_rules();
+			} else {
+				$wp_rewrite -> flush_rules( true );
+				add_rewrite_rule( "$cat/([0-9a-z]{4,})", 'index.php?' . $cat . '=$matches[1]', 'top' );
+				flush_rewrite_rules();
+			}
 			$alOptions['oldCat'] = $alOptions['redirectCat'];
+			$alOptions['oldRedirectType'] = $alOptions['redirectType'];
 			update_option( 'anylink_options', $alOptions );
 		}
 	}

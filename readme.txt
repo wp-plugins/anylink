@@ -1,10 +1,10 @@
-=== anyLink ===
+﻿=== anyLink ===
 Contributors: SivaDu
 Donate link: http://dudo.org/
 Tags: seo, link sanitize, covert external links to internal links
 Requires at least: 3.4
-Tested up to: 3.6
-Stable tag: 0.1.1
+Tested up to: 3.6.1
+Stable tag: 0.1.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -41,6 +41,11 @@ external links.
 
 == Changelog ==
 
+=0.1.2=
+*	Fixed some bugs in previous version
+*	Customed post type posts supported
+*	Javascript to redirect a page is available now
+
 =0.1.1=
 *	Fixed some bugs in v0.1
 *	Both English and Chinese languages are now supported
@@ -52,6 +57,11 @@ external links.
 *	Customise redirect http status code
 
 == Upgrade Notice ==
+
+=0.1.1=
+Fixed some bugs in v0.1
+Both English and Chinese languages are now supported
+POT file is supplied, so you can tranlate it into your own language as well
 
 =0.1=
 Main feature is developed.

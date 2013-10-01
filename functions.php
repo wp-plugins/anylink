@@ -1,6 +1,19 @@
 <?php
 //function to debug plugins
 defined( 'ABSPATH' ) OR exit;
+if(!function_exists('_log')){
+  function _log( $str = '', $message ) {
+    if( WP_DEBUG === true ){
+      if( is_array( $message ) || is_object( $message ) ){
+		error_log( $str );
+        error_log( print_r( $message, true ) );
+      } else {
+		error_log( $str );
+        error_log( $message );
+      }
+    }
+  }
+}
 function indexOf( $substr, $str ) {
 	if( strpos( $str, $substr ) === 0 )
 		return true;
@@ -51,18 +64,29 @@ function anylnkInstall() {
 	//add options
 	if( ! get_option( 'anylink_options' ) ) {
 		add_option( 'anylink_options', 
-			array( 'redirectCat' => 'goto', 
+			array( 
+					'version' => '0.12',
+					'redirectCat' => 'goto', 
 					'oldCat' => 'goto',
 					'redirectType' => '307',
+					'oldRedirectType' => '307',
 					'slugNum' => '4',
 					'oldSlugNum' => '4',
 					'slugChar' => '2',
-					'oldSlugChar' => '2'),
+					'oldSlugChar' => '2' ),
 			'', 'no' );
-	}
-	//add and flush rewrite rule
-	add_rewrite_rule( "goto/([0-9a-z]{4,})", 'index.php?goto=$matches[1]', 'top' );
-	flush_rewrite_rules();
+		//add and flush rewrite rule
+		add_rewrite_rule( "goto/([0-9a-z]{4,})", 'index.php?goto=$matches[1]', 'top' );
+		flush_rewrite_rules();
+	} else {
+		/* update option */
+		$al_option = get_option( 'anylink_options' );
+		if( ! isset( $al_option['version'] ) ) {
+			$al_option['version'] = '0.12';
+			$al_option['oldRedirectType'] = $al_option['redirectType'];
+			update_option( 'anylink_options', $al_option );
+		}
+	}		
 }
 function al_load_textdomain() {
 	$pluginDir = basename( dirname( __FILE__ ) );

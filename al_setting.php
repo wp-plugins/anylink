@@ -34,9 +34,8 @@ if( isset( $_POST['action'] ) && $_POST['action'] == 'anylink_scan' ) {
 	set_time_limit( 0 );
 	require_once( ANYLNK_PATH . "/classes/al_covert.php" );
 	$objAllPost = new al_covert();
-	$arrPostTypes = array('post', 'page');
 	$arrPostID = array();
-	$arrPostID = $objAllPost -> arrGetPostIDsByType( $arrPostTypes );
+	$arrPostID = $objAllPost -> arrGetPostIDs();
 	$j = count( $arrPostID );
 	$k = 0;
 	foreach( $arrPostID as $ID ) {

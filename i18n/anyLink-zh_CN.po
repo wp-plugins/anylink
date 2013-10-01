@@ -3,16 +3,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: anyLink 0.1\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/anyLink\n"
-"POT-Creation-Date: 2013-09-10 12:47:13+00:00\n"
+"POT-Creation-Date: 2013-10-01 11:35:21+00:00\n"
+"PO-Revision-Date: 2013-10-01 21:35+1000\n"
+"Last-Translator: dudo <fenglingziyi@163.com>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2013-09-10 23:23+1000\n"
-"Last-Translator: dudo <fenglingziyi@163.com>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
 "X-Generator: Poedit 1.5.7\n"
 
-#: al_setting.php:5
+#: al_setting.php:5 classes/al_option.php:11
 msgid "anylink Settings"
 msgstr "anylink设置"
 
@@ -49,10 +49,6 @@ msgstr "注意：只有在“基本设置”中修改了slug样式时该功能�
 msgid "Regenerate slugs"
 msgstr "重新生成slug"
 
-#: classes/al_option.php:11
-msgid "anyLink Settings"
-msgstr "anylink设置"
-
 #: classes/al_option.php:22
 msgid "You do not have sufficient permissions to access this page."
 msgstr "您无权访问本页面"
@@ -77,38 +73,38 @@ msgstr "自动生产链接slug的长度"
 msgid "Component of slug"
 msgstr "自动生产链接slug的构成"
 
-#: classes/al_option.php:42
+#: classes/al_option.php:43
 msgid ""
 "Make sure it starts with a letter, ONLY contains letters, numbers, "
 "underscore and dash. The max. length is 12"
 msgstr ""
 "请确保以字母开头，且仅含有字母、数字、下划线、连接符，最大长度不超过12个"
 
-#: classes/al_option.php:62
+#: classes/al_option.php:63
 msgid "301 Moved Permanently"
 msgstr "301 永久性跳转"
 
-#: classes/al_option.php:64
+#: classes/al_option.php:65
 msgid "307 Temporary Redirect"
 msgstr "307 临时性跳转"
 
-#: classes/al_option.php:66
+#: classes/al_option.php:67
 msgid "Redirect using Javascript on a single page"
 msgstr "javascript中间页跳转"
 
-#: classes/al_option.php:77
+#: classes/al_option.php:78
 msgid "Pure digits"
 msgstr "纯数字"
 
-#: classes/al_option.php:80
+#: classes/al_option.php:81
 msgid "Pure alphabets"
 msgstr "纯字母"
 
-#: classes/al_option.php:83
+#: classes/al_option.php:84
 msgid "Digits and alphabets"
 msgstr "字母与数字组合"
 
-#: classes/al_option.php:84
+#: classes/al_option.php:85
 msgid ""
 "Recommended setting is 4 digits and alphabets. If using PURE DIGITS please "
 "set the length no less than 6."
@@ -125,6 +121,18 @@ msgstr ""
 #: i18n/pomo/sample/app.php:62
 msgid "Bye\n"
 msgstr ""
+
+#: redirect.php:16
+msgid "This page is not availabe at the moment!"
+msgstr "当前页面不可用"
+
+#: redirect.php:23
+msgid "Redirecting ..."
+msgstr "正在跳转……"
+
+#: redirect.php:32
+msgid "Page is redirecting. Please wait..."
+msgstr "正在为您重新定向，请稍候……"
 
 #. Plugin Name of the plugin/theme
 msgid "anyLink"
@@ -152,3 +160,6 @@ msgstr ""
 #. Author URI of the plugin/theme
 msgid "http://dudo.org/about"
 msgstr ""
+
+#~ msgid "anyLink Settings"
+#~ msgstr "anylink设置"

@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the anyLink package.
 msgid ""
 msgstr ""
-"Project-Id-Version: anyLink 0.1\n"
+"Project-Id-Version: anyLink 0.1.2\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/anyLink\n"
-"POT-Creation-Date: 2013-09-10 13:19:27+00:00\n"
+"POT-Creation-Date: 2013-10-01 11:35:21+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -60,35 +60,35 @@ msgstr ""
 msgid "Component of slug"
 msgstr ""
 
-#: classes/al_option.php:42
+#: classes/al_option.php:43
 msgid "Make sure it starts with a letter, ONLY contains letters, numbers, underscore and dash. The max. length is 12"
 msgstr ""
 
-#: classes/al_option.php:62
+#: classes/al_option.php:63
 msgid "301 Moved Permanently"
 msgstr ""
 
-#: classes/al_option.php:64
+#: classes/al_option.php:65
 msgid "307 Temporary Redirect"
 msgstr ""
 
-#: classes/al_option.php:66
+#: classes/al_option.php:67
 msgid "Redirect using Javascript on a single page"
 msgstr ""
 
-#: classes/al_option.php:77
+#: classes/al_option.php:78
 msgid "Pure digits"
 msgstr ""
 
-#: classes/al_option.php:80
+#: classes/al_option.php:81
 msgid "Pure alphabets"
 msgstr ""
 
-#: classes/al_option.php:83
+#: classes/al_option.php:84
 msgid "Digits and alphabets"
 msgstr ""
 
-#: classes/al_option.php:84
+#: classes/al_option.php:85
 msgid "Recommended setting is 4 digits and alphabets. If using PURE DIGITS please set the length no less than 6."
 msgstr ""
 
@@ -102,6 +102,18 @@ msgstr ""
 
 #: i18n/pomo/sample/app.php:62
 msgid "Bye\n"
+msgstr ""
+
+#: redirect.php:16
+msgid "This page is not availabe at the moment!"
+msgstr ""
+
+#: redirect.php:23
+msgid "Redirecting ..."
+msgstr ""
+
+#: redirect.php:32
+msgid "Page is redirecting. Please wait..."
 msgstr ""
 #. Plugin Name of the plugin/theme
 msgid "anyLink"
