@@ -41,12 +41,12 @@ external links.
 
 == Changelog ==
 
-=0.1.2=
+= 0.1.2 =
 *	Fixed some bugs in previous version
 *	Customed post type posts supported
 *	Javascript to redirect a page is available now
 
-=0.1.1=
+= 0.1.1 =
 *	Fixed some bugs in v0.1
 *	Both English and Chinese languages are now supported
 *	POT file is supplied, so you can tranlate it into your own language as well
