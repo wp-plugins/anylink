@@ -74,7 +74,7 @@ class al_filter {
 		else
 			$gotoURL = $_GET[$this -> redirectCat];
 		if( ! empty( $gotoURL ) ) {
-			wp_redirect( $this -> getUrlBySlug( $gotoURL ), ( int )$this -> redirectType );
+			wp_redirect( htmlspecialchars_decode( $this -> getUrlBySlug( $gotoURL ) ), ( int )$this -> redirectType );
 			exit;
 		}	
 	}

@@ -3,8 +3,8 @@ Contributors: SivaDu
 Donate link: http://dudo.org/
 Tags: seo, link sanitize, covert external links to internal links
 Requires at least: 3.4
-Tested up to: 3.6.1
-Stable tag: 0.1.2
+Tested up to: 3.7.1
+Stable tag: 0.1.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -41,6 +41,9 @@ external links.
 
 == Changelog ==
 
+= 0.1.3 =
+*	Fixed redirect problems, e.g. you can redirect url like http://dudo.org/.../url=http://...
+
 = 0.1.2 =
 *	Fixed some bugs in previous version
 *	Customed post type posts supported
@@ -57,6 +60,9 @@ external links.
 *	Customise redirect http status code
 
 == Upgrade Notice ==
+
+=0.1.3=
+Fixed a bug which can cause url broken when redirecting
 
 =0.1.1=
 Fixed some bugs in v0.1
