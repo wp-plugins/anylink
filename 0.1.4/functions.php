@@ -75,12 +75,13 @@ function anylnkInstall() {
 		if( ! isset( $al_option['version'] ) ) {
 			$al_option['version'] = '0.12';
 			$al_option['oldRedirectType'] = $al_option['redirectType'];
+			update_option( 'anylink_options', $al_option );
 		} 
 		if ( $al_option['version'] < 14 ) {
 			$al_option['postType'] = array( 'post', 'page' );
+			$al_option['version'] = 14;
+			update_option( 'anylink_options', $al_option );
 		}
-		$al_option['version'] = 14;
-		update_option( 'anylink_options', $al_option );
 	}		
 }
 function al_load_textdomain() {
