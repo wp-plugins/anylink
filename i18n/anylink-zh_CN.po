@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: anyLink 0.1\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/anylink\n"
-"POT-Creation-Date: 2014-01-08 08:53:40+00:00\n"
-"PO-Revision-Date: 2014-01-08 20:02+1000\n"
+"POT-Creation-Date: 2014-01-08 10:34:04+00:00\n"
+"PO-Revision-Date: 2014-01-08 21:38+1000\n"
 "Last-Translator: dudo <fenglingziyi@163.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -96,6 +96,10 @@ msgstr "307 临时性跳转"
 msgid "Redirect using Javascript on a single page"
 msgstr "javascript中间页跳转"
 
+#: classes/al_option.php:73
+msgid "No less than 4 and no more than 12 characters"
+msgstr "长度最短不超过4位，最长不超过12位"
+
 #: classes/al_option.php:79
 msgid "Pure digits"
 msgstr "纯数字"
@@ -114,7 +118,7 @@ msgid ""
 "set the length no less than 6."
 msgstr "建议slug设置为4位字母与数字混合。单纯使用数字时长度最好设置为6位以上。"
 
-#: classes/al_option.php:106
+#: classes/al_option.php:108
 msgid ""
 "Select which type(s) of post you want to covert. Even though you select none "
 "of these, this plug-in is still working. Once you changed these options, you "
