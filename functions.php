@@ -51,7 +51,7 @@ function anylnkInstall() {
 	if( ! get_option( 'anylink_options' ) ) {
 		add_option( 'anylink_options', 
 			array( 
-					'version' => '0.12',
+					'version' => 14,
 					'redirectCat' => 'goto', 
 					'oldCat' => 'goto',
 					'redirectType' => '307',
@@ -60,7 +60,10 @@ function anylnkInstall() {
 					'oldSlugNum' => '4',
 					'slugChar' => '2',
 					'oldSlugChar' => '2',
-					'postType' => 'post',
+					'postType' => array(
+										'post',
+										'page',
+										),
 					),
 			'', 'no' );
 		//add and flush rewrite rule
@@ -72,15 +75,16 @@ function anylnkInstall() {
 		if( ! isset( $al_option['version'] ) ) {
 			$al_option['version'] = '0.12';
 			$al_option['oldRedirectType'] = $al_option['redirectType'];
-			update_option( 'anylink_options', $al_option );
-		} elseif ( $al_option['version'] < 0.14 ) {
-			$al_option['postType'] = 'post';
-			update_option( 'anylink_options', $al_option );
+		} 
+		if ( $al_option['version'] < 14 ) {
+			$al_option['postType'] = array( 'post', 'page' );
 		}
+		$al_option['version'] = 14;
+		update_option( 'anylink_options', $al_option );
 	}		
 }
 function al_load_textdomain() {
 	$pluginDir = basename( dirname( __FILE__ ) );
-	load_plugin_textdomain( 'anylink', false, $pluginDir . '/i18n/' );
+	load_plugin_textdomain( 'anylink', false, $pluginDir . '/i18n' );
 }
 ?>

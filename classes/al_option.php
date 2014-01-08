@@ -98,9 +98,11 @@ class al_option {
 		$post_types = get_post_types( $args, $output );
 		$html = '';
 		foreach( $post_types as $post_type ) {
-		$checked = '';
-			if( ! empty( $types ) && array_search( $post_type, $types ) !== false )
-				$checked = "checked='checked'";
+			$checked = '';
+			if( ! empty( $types ) ){
+				if( ( is_string( $types ) && $post_type == $types ) || ( is_array( $types ) && array_search( $post_type, $types ) !== false ) )
+					$checked = "checked='checked'";
+			}
 			$html .= "<input type='checkbox' id='{$post_type}' name='anylink_options[postType][]' value='{$post_type}' {$checked} /><label for='{$post_type}'> " . $post_type . "</label><br />";
 		}
 		$html .= "<b>" . __( 'Select which type(s) of post you want to covert. Even though you select none of these, this plug-in is still working. Once you changed these options, you needn\'t regenerate slugs at all.', 'anylink' ) . "</b>";
