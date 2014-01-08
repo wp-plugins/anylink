@@ -70,7 +70,7 @@ class al_option {
 	}
 	public function dispSlugNum() {
 		$num = $this -> anylinkOptions['slugNum'];
-		echo "<input type='text' id='slugNum' name='anylink_options[slugNum]' value='{$num}' class='small-text' size='4' maxlength='2' /><br />No less than 4 and no more than 12";
+		echo "<input type='text' id='slugNum' name='anylink_options[slugNum]' value='{$num}' class='small-text' size='4' maxlength='2' /><br />" . __( 'No less than 4 and no more than 12 characters', 'anylink' );
 	}
 	public function dispSlugChar() {
 		$chars = $this -> anylinkOptions['slugChar'];
