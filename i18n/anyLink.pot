@@ -1,14 +1,14 @@
-# Copyright (C) 2014 
-# This file is distributed under the same license as the  package.
+# Copyright (C) 2013 anyLink
+# This file is distributed under the same license as the anyLink package.
 msgid ""
 msgstr ""
-"Project-Id-Version:  \n"
-"Report-Msgid-Bugs-To: http://wordpress.org/tag/anylink\n"
-"POT-Creation-Date: 2014-01-08 08:53:40+00:00\n"
+"Project-Id-Version: anyLink 0.1.2\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/anyLink\n"
+"POT-Creation-Date: 2013-10-01 11:35:21+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2014-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2013-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 
@@ -21,18 +21,11 @@ msgid "Establish Index"
 msgstr ""
 
 #: al_setting.php:14
-msgid ""
-"For the first time after you running anylink, you need indexing ALL posts. "
-"It'll let you establish index for the posts already in your Wordpress. For "
-"the newly publish or update post, index is done automatically. And you "
-"needn't do anything."
+msgid "For the first time after you running anylink, you need indexing ALL posts. It'll let you establish index for the posts already in your Wordpress. For the newly publish or update post, index is done automatically. And you needn't do anything."
 msgstr ""
 
 #: al_setting.php:23
-msgid ""
-"Allows you to generate slugs manually. Keep in mind that please do not "
-"regenerate slugs unless you changed slug settings. Search engines may think "
-"that you have modified your articles."
+msgid "Allows you to generate slugs manually. Keep in mind that please do not regenerate slugs unless you changed slug settings. Search engines may think that you have modified your articles."
 msgstr ""
 
 #: al_setting.php:23
@@ -67,61 +60,77 @@ msgstr ""
 msgid "Component of slug"
 msgstr ""
 
-#: classes/al_option.php:36
-msgid "Post Types"
+#: classes/al_option.php:43
+msgid "Make sure it starts with a letter, ONLY contains letters, numbers, underscore and dash. The max. length is 12"
 msgstr ""
 
-#: classes/al_option.php:44
-msgid ""
-"Make sure it starts with a letter, ONLY contains letters, numbers, "
-"underscore and dash. The max. length is 12"
-msgstr ""
-
-#: classes/al_option.php:64
+#: classes/al_option.php:63
 msgid "301 Moved Permanently"
 msgstr ""
 
-#: classes/al_option.php:66
+#: classes/al_option.php:65
 msgid "307 Temporary Redirect"
 msgstr ""
 
-#: classes/al_option.php:68
+#: classes/al_option.php:67
 msgid "Redirect using Javascript on a single page"
 msgstr ""
 
-#: classes/al_option.php:79
+#: classes/al_option.php:78
 msgid "Pure digits"
 msgstr ""
 
-#: classes/al_option.php:82
+#: classes/al_option.php:81
 msgid "Pure alphabets"
 msgstr ""
 
-#: classes/al_option.php:85
+#: classes/al_option.php:84
 msgid "Digits and alphabets"
 msgstr ""
 
-#: classes/al_option.php:86
-msgid ""
-"Recommended setting is 4 digits and alphabets. If using PURE DIGITS please "
-"set the length no less than 6."
+#: classes/al_option.php:85
+msgid "Recommended setting is 4 digits and alphabets. If using PURE DIGITS please set the length no less than 6."
 msgstr ""
 
-#: classes/al_option.php:106
-msgid ""
-"Select which type(s) of post you want to covert. Even though you select none "
-"of these, this plug-in is still working. Once you changed these options, you "
-"needn't regenerate slugs at all."
+#: i18n/pomo/sample/app.php:56
+msgid "Welcome %s!"
 msgstr ""
 
-#: redirect.php:23
+#: i18n/pomo/sample/app.php:60
+msgid "A string with low priority!"
+msgstr ""
+
+#: i18n/pomo/sample/app.php:62
+msgid "Bye\n"
+msgstr ""
+
+#: redirect.php:16
 msgid "This page is not availabe at the moment!"
 msgstr ""
 
-#: redirect.php:30
+#: redirect.php:23
 msgid "Redirecting ..."
 msgstr ""
 
-#: redirect.php:39
+#: redirect.php:32
 msgid "Page is redirecting. Please wait..."
+msgstr ""
+#. Plugin Name of the plugin/theme
+msgid "anyLink"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "http://dudo.org/anylink"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid "anyLink is an external links management tool. It help you to covert all the external links in your posts into internal links automatically. It can prevent the website weight flow outside to others. It's absolutely SEO friendly."
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "dudo"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "http://dudo.org/about"
 msgstr ""

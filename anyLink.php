@@ -60,7 +60,7 @@ function filterByType( $content ) {
 	if( empty( $types ) ){
 		return $content;
 	}
-	if( array_search( $type, $types ) !== false ){
+	if( ( is_string( $types ) && ( $types == $type ) ) || ( is_array( $types ) && array_search( $type, $types ) !== false ) ){
 		$filter = new al_filter();
 		return $filter -> applyFilter( $content );
 	} else {
