@@ -33,6 +33,7 @@ class al_option {
 		add_settings_field( 'al_slug_num', __( 'Length of slugs', 'anylink'), array( &$this, 'dispSlugNum' ), 'anyLinkSetting', 'al_general_settings' );
 		add_settings_field( 'al_slug_char', __( 'Component of slug', 'anylink' ), array( &$this, 'dispSlugChar' ), 'anyLinkSetting', 'al_general_settings' );
 		add_settings_field( 'al_form_identify', '', array( &$this, 'hiddenFormIdentify' ), 'anyLinkSetting', 'al_general_settings' );
+		add_settings_field( 'al_post_types', __( 'Post Types', 'anylink' ), array( $this, 'dispPostTypes' ), 'anyLinkSetting', 'al_general_settings' );
 		load_plugin_textdomain( 'anylink', false, ANYLNK_PATH . '/i18n/' );
 	}
 	public function alGeneralDisp() {
@@ -68,7 +69,7 @@ class al_option {
 		echo $redirectType;
 	}
 	public function dispSlugNum() {
-		$num = $this ->anylinkOptions['slugNum'];
+		$num = $this -> anylinkOptions['slugNum'];
 		echo "<input type='text' id='slugNum' name='anylink_options[slugNum]' value='{$num}' class='small-text' size='4' maxlength='2' /><br />No less than 4 and no more than 12";
 	}
 	public function dispSlugChar() {
@@ -85,6 +86,26 @@ class al_option {
 		$htmlChar .= "<br /><b>" . __( 'Recommended setting is 4 digits and alphabets. If using PURE DIGITS please set the length no less than 6.', 'anylink' ) . "</b>";
 		echo $htmlChar;
 	}
+	/**
+	 * Display all post types
+	 */
+	public function dispPostTypes() {
+		$types = $this -> anylinkOptions['postType'];
+		$args = array( 
+				'public' => true,
+			);
+		$output = 'names';
+		$post_types = get_post_types( $args, $output );
+		$html = '';
+		foreach( $post_types as $post_type ) {
+		$checked = '';
+			if( ! empty( $types ) && array_search( $post_type, $types ) !== false )
+				$checked = "checked='checked'";
+			$html .= "<input type='checkbox' id='{$post_type}' name='anylink_options[postType][]' value='{$post_type}' {$checked} /><label for='{$post_type}'> " . $post_type . "</label><br />";
+		}
+		$html .= "<b>" . __( 'Select which type(s) of post you want to covert. Even though you select none of these, this plug-in is still working. Once you changed these options, you needn\'t regenerate slugs at all.', 'anylink' ) . "</b>";
+		echo $html;
+	}
 	/*  I should put some validations here
 	 *  a filter named "sanitize_option_$optionname" is applied when you can update_option
 	 *  so we need an identify key to determine which form the data come form
@@ -93,7 +114,7 @@ class al_option {
 		if( ! array_key_exists( 'identify', $input ) )
 			return $input;
 		$oldOptions = $this -> anylinkOptions;
-		$input = array_map( "trim", $input );
+		//$input = array_map( "trim", $input );
 		if( preg_match( '/^[a-z][a-z0-9_-]{0,11}/', $input['redirectCat'] ) )
 			$oldOptions['redirectCat'] = $input['redirectCat'];
 		if( $input['redirectType'] == 301 || $input['redirectType'] == 307 || $input['redirectType'] == 200 )
@@ -101,6 +122,8 @@ class al_option {
 		if( is_int( ( int )$input['slugNum'] ) && $input['slugNum'] < 13 && $input['slugNum'] > 3 )
 			$oldOptions['slugNum'] = $input['slugNum'];
 		$oldOptions['slugChar'] = $input['slugChar'];
+		$oldOptions['postType'] = $input['postType'];
+		_log( 'd', $input );
 		return $oldOptions;
 	}
 	//out put a hidden field to identify the form

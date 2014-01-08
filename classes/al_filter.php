@@ -71,7 +71,7 @@ class al_filter {
 				$gotoURL = $wp -> query_vars[$this -> redirectCat];
 			else
 				return;
-		else
+		elseif( isset( $_GET[$this -> redirectCat] ))
 			$gotoURL = $_GET[$this -> redirectCat];
 		if( ! empty( $gotoURL ) ) {
 			wp_redirect( htmlspecialchars_decode( $this -> getUrlBySlug( $gotoURL ) ), ( int )$this -> redirectType );

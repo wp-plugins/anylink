@@ -1,19 +1,5 @@
 <?php
-//function to debug plugins
 defined( 'ABSPATH' ) OR exit;
-if(!function_exists('_log')){
-  function _log( $str = '', $message ) {
-    if( WP_DEBUG === true ){
-      if( is_array( $message ) || is_object( $message ) ){
-		error_log( $str );
-        error_log( print_r( $message, true ) );
-      } else {
-		error_log( $str );
-        error_log( $message );
-      }
-    }
-  }
-}
 function indexOf( $substr, $str ) {
 	if( strpos( $str, $substr ) === 0 )
 		return true;
@@ -73,7 +59,9 @@ function anylnkInstall() {
 					'slugNum' => '4',
 					'oldSlugNum' => '4',
 					'slugChar' => '2',
-					'oldSlugChar' => '2' ),
+					'oldSlugChar' => '2',
+					'postType' => 'post',
+					),
 			'', 'no' );
 		//add and flush rewrite rule
 		add_rewrite_rule( "goto/([0-9a-z]{4,})", 'index.php?goto=$matches[1]', 'top' );
@@ -84,6 +72,9 @@ function anylnkInstall() {
 		if( ! isset( $al_option['version'] ) ) {
 			$al_option['version'] = '0.12';
 			$al_option['oldRedirectType'] = $al_option['redirectType'];
+			update_option( 'anylink_options', $al_option );
+		} elseif ( $al_option['version'] < 0.14 ) {
+			$al_option['postType'] = 'post';
 			update_option( 'anylink_options', $al_option );
 		}
 	}		

@@ -3,8 +3,8 @@ Contributors: SivaDu
 Donate link: http://dudo.org/
 Tags: seo, link sanitize, covert external links to internal links
 Requires at least: 3.4
-Tested up to: 3.7.1
-Stable tag: 0.1.3
+Tested up to: 3.8
+Stable tag: 0.1.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -40,6 +40,15 @@ external links.
 3. Scan all your post for the first time.
 
 == Changelog ==
+
+= 0.1.4 =
+*	Fully support custom post types.
+*	You can custom which post types to be coverted which not.
+*	Most important, you needn't regenerate index once you change these settings
+*	Change log in Chinese below 以下为中文更新内容
+*	增加了对自定义类型文章的支持
+*	允许用户通过后台设置哪些类型的文章进行转换，哪些不需要进行转换
+*	最重要的是每次你更改这些设置时都不需要重新生成索引。
 
 = 0.1.3 =
 *	Fixed redirect problems, e.g. you can redirect url like http://dudo.org/.../url=http://...

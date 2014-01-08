@@ -145,6 +145,7 @@ class al_covert {
 	public function covertURLs( $id ) {
 		$thePost = get_post( $id,  ARRAY_A );
 		$content = $thePost['post_content']; //get post content
+		_log( 'content', $content );
 		$arrURLs = array();
 		$arrIDs  = array();
 		$arrURLs = $this -> arrGetAllLnks( $content );
