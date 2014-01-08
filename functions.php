@@ -77,7 +77,7 @@ function anylnkInstall() {
 			$al_option['oldRedirectType'] = $al_option['redirectType'];
 			update_option( 'anylink_options', $al_option );
 		} 
-		if ( $al_option['version'] < 14 ) {
+		if ( ( float )$al_option['version'] < 14 ) {
 			$al_option['postType'] = array( 'post', 'page' );
 			$al_option['version'] = 14;
 			update_option( 'anylink_options', $al_option );
