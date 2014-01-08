@@ -123,7 +123,7 @@ class al_option {
 			$oldOptions['slugNum'] = $input['slugNum'];
 		$oldOptions['slugChar'] = $input['slugChar'];
 		$oldOptions['postType'] = $input['postType'];
-		_log( 'd', $input );
+
 		return $oldOptions;
 	}
 	//out put a hidden field to identify the form
