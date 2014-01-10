@@ -4,7 +4,7 @@ Donate link: http://dudo.org/
 Tags: seo, link sanitize, covert external links to internal links
 Requires at least: 3.4
 Tested up to: 3.8
-Stable tag: 0.1.4
+Stable tag: 0.1.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -40,6 +40,12 @@ external links.
 3. Scan all your post for the first time.
 
 == Changelog ==
+
+= 0.1.5 =
+*	Add a method anylink() you can call it anywhere. e.g. anylink( 'http://dudo.org', get_the_ID() ) you will get a coverted link
+*	another example: <? echo function_exists('anylink') ? anylink( $externalUrl, get_the_ID()) : $externalUrl; ?>
+*	增加了一个 anylink()方法，接受两个参数，第一个为需要转换的链接，第二个为文章ID，如果文章ID为空则默认为0
+*	使用方法如下 <? echo function_exists('anylink') ? anylink( $externalUrl, get_the_ID()) : $externalUrl; ?>
 
 = 0.1.4 =
 *	Fully support custom post types.

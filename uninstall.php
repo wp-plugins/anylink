@@ -4,7 +4,7 @@
         return;
 	global $wpdb;
 	$wpdb -> query ( $wpdb -> prepare( 
-			"DROP TABLE  wp_al_urls, wp_al_urls_index", '' ) );
+			"DROP TABLE " . $wpdb -> prefix . "al_urls, " . $wpdb -> prefix . "al_urls_index") );
 	delete_option('anylink_options');
 	flush_rewrite_rules();
 ?>

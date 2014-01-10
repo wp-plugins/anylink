@@ -3,7 +3,7 @@
 Plugin Name: anyLink
 Plugin URI: http://dudo.org/anylink
 Description: anyLink is an external links management tool. It help you to covert all the external links in your posts into internal links automatically. It can prevent the website weight flow outside to others. It's absolutely SEO friendly.
-Version: 0.1.4
+Version: 0.1.5
 Author: dudo
 Author URI: http://dudo.org/about
 License: GPL2 or later
@@ -19,7 +19,26 @@ register_activation_hook( __FILE__, 'anylnkInstall' );
 $filter = new al_filter();
 $alOption = new al_option();
 add_action( 'transition_post_status', 'post_published', 10, 3 );
+add_action( 'wp_loaded','checkFlush' );
 
+/**
+ * Check rewrite rules and flush
+ *
+ * Checking if rewrite rules are included, if not we should re-flush it;
+ *
+ * @see http://codex.wordpress.org/Class_Reference/WP_Rewrite#Examples
+ * @since version 0.1.5
+ */
+function checkFlush(){
+	$rules = get_option( 'rewrite_rules' );
+	$alOption = get_option( 'anylink_options' );
+	$cat = $alOption['redirectCat'];
+	
+	if( ! isset( $rules[$cat . '/([0-9a-z]{4,})'] ) ){
+		global $wp_rewrite;
+		$wp_rewrite -> flush_rules();
+	}
+}
 /**
  * This function is to replace old ACTTION hook 'publish_post'
  *
@@ -63,6 +82,7 @@ function filterByType( $content ) {
 	if( ( is_string( $types ) && ( $types == $type ) ) || ( is_array( $types ) && array_search( $type, $types ) !== false ) ){
 		$filter = new al_filter();
 		return $filter -> applyFilter( $content );
+		
 	} else {
 		return $content;
 	}

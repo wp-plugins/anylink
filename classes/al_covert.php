@@ -31,7 +31,7 @@ class al_covert {
 		}
 		return $result;
 	}
-	private function storeExtLnks($arrURLs ) {
+	public function storeExtLnks( $arrURLs ) {
 		global $wpdb;
 		$urlIDs = array();
 		$slugs = new al_slug();
@@ -65,7 +65,7 @@ class al_covert {
 		}
 		return $urlIDs;
 	}
-	private function storeRel ( $post_id, $arrUrlIDs ) {
+	public function storeRel ( $post_id, $arrUrlIDs ) {
 		global $wpdb;
 		$arrOldIndex = array();
 		//some links may be deleted after your editing the post

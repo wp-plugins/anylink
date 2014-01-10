@@ -9,12 +9,12 @@ class al_filter {
 		$this -> redirectType = $anylinkOptions['redirectType'];
 	}
 	//@post_id: get all links and slugs of a specified post
-	private function getAllLnks( $post_id ) {
+	public function getAllLnks( $post_id ) {
 		$arrURL = array();
 		global $wpdb;
 		$arrURL = $wpdb -> get_results( $wpdb -> prepare( 
 			"
-			SELECT U.al_slug,U.al_origURL 
+			SELECT U.al_id, U.al_slug,U.al_origURL 
 			FROM " . ANYLNK_DBINDEX . " I
 			LEFT JOIN " . ANYLNK_DBTB . " U
 			ON I.al_url_id = U.al_id
@@ -39,14 +39,10 @@ class al_filter {
 	public function applyFilter( $content ) {
 		global $wp_query, $wp_rewrite;
 		$post_id = get_the_id();
-		$siteURL = home_url();
 		$arrUrlSlug = $this -> getAllLnks( $post_id );
 		if( $arrUrlSlug ) {
 			foreach( $arrUrlSlug as $arrSlugs ) {
-				if( $wp_rewrite -> using_permalinks() )
-					$this -> arrU2S[$arrSlugs['al_origURL']] = $siteURL . '/' . $this -> redirectCat . '/' . $arrSlugs['al_slug'];
-				else
-					$this -> arrU2S[$arrSlugs['al_origURL']] = $siteURL . '/?' . $this -> redirectCat . '=' . $arrSlugs['al_slug'];
+				$this -> arrU2S[$arrSlugs['al_origURL']] = $this -> getInternalLinkBySlug( $arrSlugs['al_slug'] );
 			}
 		}
 		$pattern  = '/(<a\s*?.*?\s*?';
@@ -78,16 +74,37 @@ class al_filter {
 			exit;
 		}	
 	}
-	private function getUrlBySlug( $slug ) {
+	public function getUrlBySlug( $slug ) {
 		global $wpdb;
 		$URL = $wpdb -> get_var( $wpdb -> prepare( 
 			"
 			SELECT al_origURL
-			FROM " . ANYLNK_DBTB ." 
+			FROM " . ANYLNK_DBTB . " 
 			WHERE al_slug = %s",
 			$slug
-		));
+		) );
 		return $URL;
+	}
+	
+	public function getSlugById( $id ) {
+		global $wpdb;
+		$arrSlug = $wpdb -> get_row( $wpdb -> prepare( 
+			"SELECT * 
+			FROM " . ANYLNK_DBTB . "
+			WHERE al_id = %s", 
+			$id
+		), ARRAY_A );
+		return $arrSlug;
+	}
+	
+	public function getInternalLinkBySlug( $slug ) {
+		global $wp_rewrite;
+		$siteURL = home_url();
+		if( $wp_rewrite -> using_permalinks() )
+			$internalLink = $siteURL . '/'  . $this -> redirectCat . '/' . $slug;
+		else
+			$internalLink = $siteURL . '/?' . $this -> redirectCat . '=' . $slug;
+		return $internalLink;
 	}
 }
 ?>

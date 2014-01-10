@@ -12,6 +12,46 @@ function index2Of( $str1, $str2 ) {
 	else
 		return false;
 }
+
+/**
+ * Covert any link to be used as a parameter
+ * 
+ * if a link is not in an article, you can call method anylink anywhere
+ * to covert it manually.
+ *
+ * @param string $link external link to be covert
+ * @param integer $postId if the link doesn't belongs any post it will be set to 0
+ *
+ * @example call anylink() like this:
+ * <?
+ * 		echo function_exists('anylink') ? anylink('http://dudo.org', get_the_ID()) : 'http://dudo.org';
+ * ?>
+ * @since version 0.1.5
+ */
+ 
+function anylink( $link, $postId = 0 ) {
+	require_once( ANYLNK_PATH . '/config.php' );
+	require_once( ANYLNK_PATH . '/classes/al_covert.php' );
+	require_once( ANYLNK_PATH . '/classes/al_filter.php' );
+	require_once( ANYLNK_PATH . '/classes/al_slug.php' );
+	require_once( ANYLNK_PATH . '/classes/al_option.php' );
+	
+	$covert = new al_covert;
+	$filter = new al_filter;
+	$id = $covert -> storeExtLnks( ( array )$link );
+	//because method storeRel will delete relationships
+	//so we must get all relationships to compare
+	$urls = $filter -> getAllLnks( $postId );
+	if( ! empty( $urls ) ) {
+		foreach( $urls as $url ){
+			$oldUrlIds[] = $url['al_id'];
+		}
+	}
+	$urlIds = array_merge( $oldUrlIds, $id );
+	$covert -> storeRel( $postId, $urlIds );
+	$objSlug = $filter -> getSlugById( $id );
+	return $filter -> getInternalLinkBySlug( $objSlug['al_slug'] );
+}
 //Install
 function anylnkInstall() {
 	global $wpdb;
