@@ -1,5 +1,18 @@
 <?php
 defined( 'ABSPATH' ) OR exit;
+if(!function_exists('_log')){
+  function _log( $str = '', $message ) {
+    if( WP_DEBUG === true ){
+      if( is_array( $message ) || is_object( $message ) ){
+		error_log( $str );
+        error_log( print_r( $message, true ) );
+      } else {
+		error_log( $str );
+        error_log( $message );
+      }
+    }
+  }
+}
 function indexOf( $substr, $str ) {
 	if( strpos( $str, $substr ) === 0 )
 		return true;
@@ -107,7 +120,7 @@ function anylnkInstall() {
 					),
 			'', 'no' );
 		//add and flush rewrite rule
-		add_rewrite_rule( "goto/([0-9a-z]{4,})", 'index.php?goto=$matches[1]', 'top' );
+		add_rewrite_rule( "goto/([0-9a-z]{4,})/?$", 'index.php?goto=$matches[1]', 'top' );
 		flush_rewrite_rules();
 	} else {
 		/* update option */

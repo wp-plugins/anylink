@@ -56,7 +56,7 @@ class al_filter {
 		return $content;
 	}
 	public function addQueryVars( $qvars ) {
-		$qvars[] = $this -> redirectCat;
+		array_push( $qvars, $this -> redirectCat );
 		return $qvars;
 	}
 	public function alter_the_query( $wp ) {

@@ -4,7 +4,7 @@ Donate link: http://dudo.org/
 Tags: seo, link sanitize, covert external links to internal links
 Requires at least: 3.4
 Tested up to: 3.8
-Stable tag: 0.1.5
+Stable tag: 0.1.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -40,6 +40,12 @@ external links.
 3. Scan all your post for the first time.
 
 == Changelog ==
+
+= 0.1.6 =
+*	Fixed some bugs cause 404 error
+*	Fixed a bug which may cause collison with other plugins
+*	修复了一些可能会引起插件造成404错误的bug
+*	修复了与其他插件存在潜在冲突的bug
 
 = 0.1.5 =
 *	Add a method anylink() you can call it anywhere. e.g. anylink( 'http://dudo.org', get_the_ID() ) you will get a coverted link

@@ -144,11 +144,11 @@ class al_option {
 				/* get the relative path of redirect file */
 				$redirectFile = substr( plugins_url(), strlen( home_url() ) + 1 ) . '/' . ANYLNK_PLUGIN . '/redirect.php';
 				/* add an external rewrite rule which will  be written into .htaccess file */
-				$wp_rewrite -> add_external_rule( "$cat/([0-9a-z]{4,})",  $redirectFile . '?slug=$1' );
+				$wp_rewrite -> add_external_rule( "$cat/([0-9a-z]{4,})/?$",  $redirectFile . '?slug=$1' );
 				flush_rewrite_rules();
 			} else {
 				$wp_rewrite -> flush_rules( true );
-				add_rewrite_rule( "$cat/([0-9a-z]{4,})", 'index.php?' . $cat . '=$matches[1]', 'top' );
+				add_rewrite_rule( "$cat/([0-9a-z]{4,})/?$", 'index.php?' . $cat . '=$matches[1]', 'top' );
 				flush_rewrite_rules();
 			}
 			$alOptions['oldCat'] = $alOptions['redirectCat'];
