@@ -115,8 +115,8 @@ class al_option {
         else
             $rel = $this -> anylinkOptions['rel'];
         $html  = "rel=<input type='text' id='anylink_rel' name='anylink_options[rel]' value='{$rel}' class='regular-text' size='20' /><br />";
-        $html .= __( "Set the property 'rel' of URLs. If you want to use the default property, please leave it blank." );
-        $html .= "<br />" . __( "Use single blank character to seperate its values." );
+        $html .= __( "Set the property 'rel' of URLs. If you want to use the default property, please leave it blank.",'anylink' );
+        $html .= "<br />" . __( "Use single blank character to seperate its values.", 'anylink' );
         echo $html;
     }
 	/*  I should put some validations here
