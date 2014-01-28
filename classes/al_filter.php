@@ -27,7 +27,6 @@ class al_filter {
 	}
 	//restore all URL
 	private function replaceURL( $matches ) {
-	     _log( 'mathc', $matches );
 		$U2S = $this -> arrU2S;
 		$siteURL = home_url();
         //$matches[2], $matches[5] already have key names: URL and rel
@@ -51,7 +50,6 @@ class al_filter {
                 }
                 $matches['rel'] = $rel;
             }
-            _log( 'mathc', $matches );
             return implode( '', $matches );
         } else {
             //if external link not indexed, or
