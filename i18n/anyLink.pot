@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  \n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/anylink\n"
-"POT-Creation-Date: 2014-01-08 10:34:04+00:00\n"
+"POT-Creation-Date: 2014-01-28 12:35:00+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -71,51 +71,65 @@ msgstr ""
 msgid "Post Types"
 msgstr ""
 
-#: classes/al_option.php:44
+#: classes/al_option.php:37
+msgid "Link properties"
+msgstr ""
+
+#: classes/al_option.php:45
 msgid ""
 "Make sure it starts with a letter, ONLY contains letters, numbers, "
 "underscore and dash. The max. length is 12"
 msgstr ""
 
-#: classes/al_option.php:64
+#: classes/al_option.php:65
 msgid "301 Moved Permanently"
 msgstr ""
 
-#: classes/al_option.php:66
+#: classes/al_option.php:67
 msgid "307 Temporary Redirect"
 msgstr ""
 
-#: classes/al_option.php:68
+#: classes/al_option.php:69
 msgid "Redirect using Javascript on a single page"
 msgstr ""
 
-#: classes/al_option.php:73
+#: classes/al_option.php:74
 msgid "No less than 4 and no more than 12 characters"
 msgstr ""
 
-#: classes/al_option.php:79
+#: classes/al_option.php:80
 msgid "Pure digits"
 msgstr ""
 
-#: classes/al_option.php:82
+#: classes/al_option.php:83
 msgid "Pure alphabets"
 msgstr ""
 
-#: classes/al_option.php:85
+#: classes/al_option.php:86
 msgid "Digits and alphabets"
 msgstr ""
 
-#: classes/al_option.php:86
+#: classes/al_option.php:87
 msgid ""
 "Recommended setting is 4 digits and alphabets. If using PURE DIGITS please "
 "set the length no less than 6."
 msgstr ""
 
-#: classes/al_option.php:108
+#: classes/al_option.php:109
 msgid ""
 "Select which type(s) of post you want to covert. Even though you select none "
 "of these, this plug-in is still working. Once you changed these options, you "
 "needn't regenerate slugs at all."
+msgstr ""
+
+#: classes/al_option.php:118
+msgid ""
+"Set the property 'rel' of URLs. If you want to use the default property, "
+"please leave it blank."
+msgstr ""
+
+#: classes/al_option.php:119
+msgid "Use single blank character to seperate its values."
 msgstr ""
 
 #: redirect.php:23

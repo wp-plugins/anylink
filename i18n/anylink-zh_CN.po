@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: anyLink 0.1\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/anylink\n"
-"POT-Creation-Date: 2014-01-08 10:34:04+00:00\n"
-"PO-Revision-Date: 2014-01-08 21:38+1000\n"
+"POT-Creation-Date: 2014-01-28 12:35:00+00:00\n"
+"PO-Revision-Date: 2014-01-28 12:39+1000\n"
 "Last-Translator: dudo <fenglingziyi@163.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -77,48 +77,52 @@ msgstr "自动生产链接slug的构成"
 msgid "Post Types"
 msgstr "需要转换的文章类型"
 
-#: classes/al_option.php:44
+#: classes/al_option.php:37
+msgid "Link properties"
+msgstr "链接属性"
+
+#: classes/al_option.php:45
 msgid ""
 "Make sure it starts with a letter, ONLY contains letters, numbers, "
 "underscore and dash. The max. length is 12"
 msgstr ""
 "请确保以字母开头，且仅含有字母、数字、下划线、连接符，最大长度不超过12个"
 
-#: classes/al_option.php:64
+#: classes/al_option.php:65
 msgid "301 Moved Permanently"
 msgstr "301 永久性跳转"
 
-#: classes/al_option.php:66
+#: classes/al_option.php:67
 msgid "307 Temporary Redirect"
 msgstr "307 临时性跳转"
 
-#: classes/al_option.php:68
+#: classes/al_option.php:69
 msgid "Redirect using Javascript on a single page"
 msgstr "javascript中间页跳转"
 
-#: classes/al_option.php:73
+#: classes/al_option.php:74
 msgid "No less than 4 and no more than 12 characters"
 msgstr "长度最短不超过4位，最长不超过12位"
 
-#: classes/al_option.php:79
+#: classes/al_option.php:80
 msgid "Pure digits"
 msgstr "纯数字"
 
-#: classes/al_option.php:82
+#: classes/al_option.php:83
 msgid "Pure alphabets"
 msgstr "纯字母"
 
-#: classes/al_option.php:85
+#: classes/al_option.php:86
 msgid "Digits and alphabets"
 msgstr "字母与数字组合"
 
-#: classes/al_option.php:86
+#: classes/al_option.php:87
 msgid ""
 "Recommended setting is 4 digits and alphabets. If using PURE DIGITS please "
 "set the length no less than 6."
 msgstr "建议slug设置为4位字母与数字混合。单纯使用数字时长度最好设置为6位以上。"
 
-#: classes/al_option.php:108
+#: classes/al_option.php:109
 msgid ""
 "Select which type(s) of post you want to covert. Even though you select none "
 "of these, this plug-in is still working. Once you changed these options, you "
@@ -126,6 +130,17 @@ msgid ""
 msgstr ""
 "选择哪些“文章类型”中的链接需要转换。即使你一个都不选，插件仍然处于工作状态。"
 "请注意，无论何时你改变了这些选项，都不需要重新生成索引。"
+
+#: classes/al_option.php:118
+msgid ""
+"Set the property 'rel' of URLs. If you want to use the default property, "
+"please leave it blank."
+msgstr ""
+"设置URL的rel属性值。如果不想让anylink修改转换后链接中的rel属性，请将此项留空"
+
+#: classes/al_option.php:119
+msgid "Use single blank character to seperate its values."
+msgstr "每个值中间请有一个半角空格分隔开"
 
 #: redirect.php:23
 msgid "This page is not availabe at the moment!"
