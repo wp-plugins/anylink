@@ -3,10 +3,12 @@ class al_filter {
 	public $arrU2S = array();
 	public $redirectCat;
 	public $redirectType;
+    public $rel;
 	function __construct() {
 		$anylinkOptions = get_option( 'anylink_options' );
 		$this -> redirectCat  = $anylinkOptions['redirectCat'];
 		$this -> redirectType = $anylinkOptions['redirectType'];
+        $this -> rel = $anylinkOptions['rel'];
 	}
 	//@post_id: get all links and slugs of a specified post
 	public function getAllLnks( $post_id ) {
@@ -25,16 +27,37 @@ class al_filter {
 	}
 	//restore all URL
 	private function replaceURL( $matches ) {
+	     _log( 'mathc', $matches );
 		$U2S = $this -> arrU2S;
 		$siteURL = home_url();
-		if( index2Of( $siteURL, $matches[2] ) )
-			return $matches[1] . $matches[2] . $matches[3];
+        //$matches[2], $matches[5] already have key names: URL and rel
+        unset( $matches[2], $matches[5] );
+        //$mathes[0]  is the full matched string, delete it to use implode later
+        array_shift( $matches );
 		//only replace the links which have slugs, or return the original URL
-		elseif( array_key_exists( "$matches[2]", $U2S ) )
-			return $matches[1] . $U2S[$matches[2]] . $matches[3];
-		//if one post or link isn't indexed, just return the original URL
-		else
-			return $matches[1] . $matches[2] . $matches[3];
+		if( array_key_exists( $matches['URL'], $U2S ) ) {
+            $matches['URL'] = $U2S[$matches['URL']];
+            //if need set rel manually
+            //get rel attributes which are already set in url and then merge them
+            if( ! empty( $this -> rel ) ) {
+                if( empty( $matches['rel'] ) )
+                    $rel = ' rel="' . $this -> rel . '"';
+                else {
+                    $_rel1 = explode( " ", $this -> rel );
+                    $_rel2 = explode( " ", $matches['rel'] );
+                    $_rel  = array_merge( $_rel1, $_rel2 );
+                    $_rel  = array_unique( $_rel );
+                    $rel   = implode( " ", $_rel );
+                }
+                $matches['rel'] = $rel;
+            }
+            _log( 'mathc', $matches );
+            return implode( '', $matches );
+        } else {
+            //if external link not indexed, or
+            //it is a interal link
+			return implode( '', $_matches );
+        }
 	}
 	public function applyFilter( $content ) {
 		global $wp_query, $wp_rewrite;
@@ -45,9 +68,11 @@ class al_filter {
 				$this -> arrU2S[$arrSlugs['al_origURL']] = $this -> getInternalLinkBySlug( $arrSlugs['al_slug'] );
 			}
 		}
-		$pattern  = '/(<a\s*?.*?\s*?';
-		$pattern .= 'href=[\'"]\s*?)(?P<URL>[^>]+?)([\'"]';
-		$pattern .= '.*?>)/i';
+		/*$pattern  = '#(<a\s*';
+		$pattern .= 'href=")(?P<URL>https?://[^"]+?)("';
+        $pattern .= '[^>]*?)(?<rel>rel="[^"]*")?';
+		$pattern .= '([^>]*?>)#i';*/
+        $pattern = '#(<a[^>]*?href=")(?<URL>https?://[^"]*)(")(?(?=[^>]*?rel=)([^>]*?rel=")(?<rel>[^"]*)([^>]*)|([^>]*))(>)#';
 		//covert ALL URLs, we can't just use str_replace, 
 		//coz a post may contain a plain URL, 
 		//even some text like this: href="http://dudo.org"

@@ -3,8 +3,8 @@ Contributors: SivaDu
 Donate link: http://dudo.org/
 Tags: seo, link sanitize, covert external links to internal links
 Requires at least: 3.4
-Tested up to: 3.8
-Stable tag: 0.1.6
+Tested up to: 3.8.1
+Stable tag: 0.1.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -40,6 +40,14 @@ external links.
 3. Scan all your post for the first time.
 
 == Changelog ==
+
+= 0.1.7 =
+*   Fixed some bugs may cause links missing
+*   optmized codes
+*   add the option which allows you set attribute REL of a link
+*   为链接增加了rel选项功能
+*   代码优化
+*   修复了一个bug，该bug可能引起anylink把内链误判为外链
 
 = 0.1.6 =
 *	Fixed some bugs cause 404 error

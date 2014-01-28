@@ -117,6 +117,7 @@ function anylnkInstall() {
 										'post',
 										'page',
 										),
+                    'rel' => 'nofollow',
 					),
 			'', 'no' );
 		//add and flush rewrite rule

@@ -34,6 +34,7 @@ class al_option {
 		add_settings_field( 'al_slug_char', __( 'Component of slug', 'anylink' ), array( &$this, 'dispSlugChar' ), 'anyLinkSetting', 'al_general_settings' );
 		add_settings_field( 'al_form_identify', '', array( &$this, 'hiddenFormIdentify' ), 'anyLinkSetting', 'al_general_settings' );
 		add_settings_field( 'al_post_types', __( 'Post Types', 'anylink' ), array( $this, 'dispPostTypes' ), 'anyLinkSetting', 'al_general_settings' );
+        add_settings_field( 'al_url_properties', __( 'Link properties', 'anylink' ), array( $this, 'dispLinkPro'), 'anyLinkSetting', 'al_general_settings' );
 		load_plugin_textdomain( 'anylink', false, ANYLNK_PATH . '/i18n/' );
 	}
 	public function alGeneralDisp() {
@@ -108,6 +109,16 @@ class al_option {
 		$html .= "<b>" . __( 'Select which type(s) of post you want to covert. Even though you select none of these, this plug-in is still working. Once you changed these options, you needn\'t regenerate slugs at all.', 'anylink' ) . "</b>";
 		echo $html;
 	}
+    public function dispLinkPro() {
+        if( ! isset( $this -> anylinkOptions['rel'] ) )
+            $rel = '';
+        else
+            $rel = $this -> anylinkOptions['rel'];
+        $html  = "rel=<input type='text' id='anylink_rel' name='anylink_options[rel]' value='{$rel}' class='regular-text' size='20' /><br />";
+        $html .= __( "Set the property 'rel' of URLs. If you want to use the default property, please leave it blank." );
+        $html .= "<br />" . __( "Use single blank character to seperate its values." );
+        echo $html;
+    }
 	/*  I should put some validations here
 	 *  a filter named "sanitize_option_$optionname" is applied when you can update_option
 	 *  so we need an identify key to determine which form the data come form
@@ -125,7 +136,7 @@ class al_option {
 			$oldOptions['slugNum'] = $input['slugNum'];
 		$oldOptions['slugChar'] = $input['slugChar'];
 		$oldOptions['postType'] = $input['postType'];
-
+        $oldOptions['rel'] = sanitize_text_field( $input['rel'] );
 		return $oldOptions;
 	}
 	//out put a hidden field to identify the form
