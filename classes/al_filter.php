@@ -54,7 +54,7 @@ class al_filter {
         } else {
             //if external link not indexed, or
             //it is a interal link
-			return implode( '', $_matches );
+			return implode( '', $matches );
         }
 	}
 	public function applyFilter( $content ) {

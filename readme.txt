@@ -4,7 +4,7 @@ Donate link: http://dudo.org/
 Tags: seo, link sanitize, covert external links to internal links
 Requires at least: 3.4
 Tested up to: 3.8.1
-Stable tag: 0.1.7
+Stable tag: 0.1.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -40,6 +40,10 @@ external links.
 3. Scan all your post for the first time.
 
 == Changelog ==
+
+= 0.1.8 =
+*   Fixed a bug which cause fatal error
+*   修复了一个严重bug
 
 = 0.1.7 =
 *   Fixed some bugs may cause links missing
