@@ -3,8 +3,8 @@ Contributors: SivaDu
 Donate link: http://dudo.org/
 Tags: seo, link sanitize, covert external links to internal links
 Requires at least: 3.4
-Tested up to: 3.8.1
-Stable tag: 0.1.8
+Tested up to: 3.9
+Stable tag: 0.1.9
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -40,6 +40,10 @@ external links.
 3. Scan all your post for the first time.
 
 == Changelog ==
+
+= 0.1.9 =
+*   修改了Javascript跳转方式，不再依赖于.htaccess配置文件
+*   优化了部分代码，性能得到一定提升
 
 = 0.1.8 =
 *   Fixed a bug which cause fatal error

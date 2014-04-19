@@ -93,9 +93,18 @@ class al_filter {
 		elseif( isset( $_GET[$this -> redirectCat] ))
 			$gotoURL = $_GET[$this -> redirectCat];
 		if( ! empty( $gotoURL ) ) {
-			wp_redirect( htmlspecialchars_decode( $this -> getUrlBySlug( $gotoURL ) ), ( int )$this -> redirectType );
-			exit;
-		}	
+            //since 0.1.9
+            // changed redirect method by javascript
+            $gotoLink = htmlspecialchars_decode( $this -> getUrlBySlug( $gotoURL ) );
+            $redirectType = ( int )$this -> redirectType;
+            if( $redirectType == 200 ) {
+                require_once( ANYLNK_PATH . '/re.php');
+                exit;
+            } else { //end
+                wp_redirect( $gotoLink, $redirectType );
+                exit;
+            }
+		}
 	}
 	public function getUrlBySlug( $slug ) {
 		global $wpdb;

@@ -150,18 +150,10 @@ class al_option {
 		if( $alOptions['redirectCat'] != $alOptions['oldCat'] || $alOptions['redirectType'] != $alOptions['oldRedirectType'] ) {
 			$cat = $alOptions['redirectCat'];
 			$type = $alOptions['redirectType'];
-			global $wp_rewrite;
-			if( $type == '200' ) {
-				/* get the relative path of redirect file */
-				$redirectFile = substr( plugins_url(), strlen( home_url() ) + 1 ) . '/' . ANYLNK_PLUGIN . '/redirect.php';
-				/* add an external rewrite rule which will  be written into .htaccess file */
-				$wp_rewrite -> add_external_rule( "$cat/([0-9a-z]{4,})/?$",  $redirectFile . '?slug=$1' );
-				flush_rewrite_rules();
-			} else {
-				$wp_rewrite -> flush_rules( true );
-				add_rewrite_rule( "$cat/([0-9a-z]{4,})/?$", 'index.php?' . $cat . '=$matches[1]', 'top' );
-				flush_rewrite_rules();
-			}
+			global $wp_rewrite;            //since 0.1.9
+			$wp_rewrite -> flush_rules( true );
+			add_rewrite_rule( "$cat/([0-9a-z]{4,})/?$", 'index.php?' . $cat . '=$matches[1]', 'top' );
+			flush_rewrite_rules();
 			$alOptions['oldCat'] = $alOptions['redirectCat'];
 			$alOptions['oldRedirectType'] = $alOptions['redirectType'];
 			update_option( 'anylink_options', $alOptions );
