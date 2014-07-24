@@ -118,6 +118,7 @@ function anylnkInstall() {
 										'page',
 										),
                     'rel' => 'nofollow',
+                    'filter-comment' => 1,
 					),
 			'', 'no' );
 		//add and flush rewrite rule
@@ -142,6 +143,11 @@ function anylnkInstall() {
 			add_rewrite_rule( "$cat/([0-9a-z]{4,})/?$", 'index.php?' . $al_option['redirectCat'] . '=$matches[1]', 'top' );
 			flush_rewrite_rules();
             $al_option['version'] = 19;
+            update_option( 'anylink_options', $al_option );
+        }
+        if( (float )$al_option['version'] < 20 ) {
+            $al_option['filter-comment'] = 1;
+            $al_option['version'] = 20;
             update_option( 'anylink_options', $al_option );
         }
 	}		
