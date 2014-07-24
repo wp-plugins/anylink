@@ -3,7 +3,7 @@
 Plugin Name: anyLink
 Plugin URI: http://dudo.org/anylink
 Description: anyLink is an external links management tool. It help you to covert all the external links in your posts into internal links automatically. It can prevent the website weight flow outside to others. It's absolutely SEO friendly.
-Version: 0.1.9
+Version: 0.2
 Author: dudo
 Author URI: http://dudo.org/about
 License: GPL2 or later
@@ -27,7 +27,9 @@ add_action( 'parse_request', array( &$filter, 'alter_the_query' ) );
 add_action( 'plugins_loaded', 'al_load_textdomain' );
 add_filter( 'the_content', 'filterByType' );
 add_filter( 'rewrite_rules_array','anylink_rewrite_rules' );
-
+add_action( 'wp_insert_comment', 'new_comment',1000, 2);
+add_filter( 'comment_text', 'filter_comment', 100, 2 );
+add_filter( 'get_comment_author_url', 'filter_comment_urls', 100 );
 /**
  * Check rewrite rules and flush
  *
@@ -95,10 +97,61 @@ function filterByType( $content ) {
 	}
 	if( ( is_string( $types ) && ( $types == $type ) ) || ( is_array( $types ) && array_search( $type, $types ) !== false ) ){
 		$filter = new al_filter();
-		return $filter -> applyFilter( $content );
+        $id = get_the_id();
+		return $filter -> applyFilter( $content, $id );
 		
 	} else {
 		return $content;
 	}
+}
+
+/**
+ * Call actions when a new comment added
+ * @param int $comment_id is the id of the comment
+ * @param object $comment is the comment object
+ * @since 0.1.9
+ */
+ function new_comment( $comment_id, $comment) {
+    $covert = new al_covert();
+    $covert -> covertURLs( $comment_id, true );
+ }
+ /**
+  * 把评论内容中的外链转换成内容
+  * 
+  * @param string $comment_text 评论内容
+  * @param object $comment comment对象，默认为null
+  * @return string $comment_text 返回处理后的评论内容以在页面上显示
+  * @since 0.2
+  */ 
+function filter_comment( $comment_text, $comment = null ){
+    $filter = new al_filter();
+    if( is_null( $comment ) )
+        return $comment_text;
+    return $filter -> applyFilter( $comment_text, $comment -> comment_ID, true );
+}
+/**
+ * 把留言者的链接转换成内链
+ * 
+ * @param string $comment_url 评论者留下的链接地址 
+ * @since 0.2
+ */
+function filter_comment_urls( $comment_url ) {
+    //如果没有留下链接，放弃处理
+    if( empty( $comment_url ) )
+        return $comment_url;
+    $anylink_option = get_option( 'anylink_options' );
+    $anylink_comment_option = $anylink_option['filter-comment'];
+    //如果设置了不对评论中的链接进行处理则原样返回
+    if( !$anylink_comment_option )
+        return $comment_url;
+    $filter = new al_filter();
+    //通过链接查找对应的slug
+    $new_comment_url_slug = $filter -> get_slug_by_url( $comment_url );
+    if( !empty( $new_comment_url_slug ) ) {
+        //根据slug产生内部链接，并返回给模板显示
+        return $filter -> getInternalLinkBySlug( $new_comment_url_slug['al_slug'] );
+    } else {    //如果链接表中没有索引这个链接，那么按原样返回
+        return $comment_url;
+    }
 }
 ?>

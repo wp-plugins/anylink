@@ -4,7 +4,7 @@ Donate link: http://dudo.org/
 Tags: seo, link sanitize, covert external links to internal links
 Requires at least: 3.4
 Tested up to: 3.9
-Stable tag: 0.1.9
+Stable tag: 0.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -40,6 +40,11 @@ external links.
 3. Scan all your post for the first time.
 
 == Changelog ==
+
+= 0.2 =
+*   增加了对评论中出现的链接的转换
+*   更新了部分代码
+*   优化性能，减少资源开支
 
 = 0.1.9 =
 *   修改了Javascript跳转方式，不再依赖于.htaccess配置文件

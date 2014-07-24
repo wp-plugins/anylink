@@ -35,6 +35,7 @@ class al_option {
 		add_settings_field( 'al_form_identify', '', array( &$this, 'hiddenFormIdentify' ), 'anyLinkSetting', 'al_general_settings' );
 		add_settings_field( 'al_post_types', __( 'Post Types', 'anylink' ), array( $this, 'dispPostTypes' ), 'anyLinkSetting', 'al_general_settings' );
         add_settings_field( 'al_url_properties', __( 'Link properties', 'anylink' ), array( $this, 'dispLinkPro'), 'anyLinkSetting', 'al_general_settings' );
+        add_settings_field(  'filter_comment_toggle', __( 'Turn on comment filter.' ), array( $this, 'display_comment_toggle'), 'anyLinkSetting', 'al_general_settings' );
 		load_plugin_textdomain( 'anylink', false, ANYLNK_PATH . '/i18n/' );
 	}
 	public function alGeneralDisp() {
@@ -119,6 +120,20 @@ class al_option {
         $html .= "<br />" . __( "Use single blank character to seperate its values.", 'anylink' );
         echo $html;
     }
+    public function display_comment_toggle() {
+        if( !isset( $this -> anylinkOptions['filter-comment'] ) )
+            $filter_comment = 1;
+        else
+            $filter_comment = $this -> anylinkOptions['filter-comment'];
+        $html  = __( "Allow anylink to filter external url in comment." );
+        $html .= "<br /><input type='radio' id='filter-comment-n' name='anylink_options[filter-comment]' value= '0'";
+        $html .= $filter_comment == 0 ? ' checked' : '';
+        $html .= "/><label for='filter-comment-n'>" . __( "Please leave comments unfiltered." ) . "</label><br />";
+        $html .= "<input type='radio' id='filter-comment-y' name='anylink_options[filter-comment]' value= '1'";
+        $html .= $filter_comment == 1 ? ' checked' : '';
+        $html .= "/><label for='filter-comment-y'>" . __( "Filter link(s) in comment" ) . "</label>";
+        echo $html;
+    }
 	/*  I should put some validations here
 	 *  a filter named "sanitize_option_$optionname" is applied when you can update_option
 	 *  so we need an identify key to determine which form the data come form
@@ -136,6 +151,7 @@ class al_option {
 			$oldOptions['slugNum'] = $input['slugNum'];
 		$oldOptions['slugChar'] = $input['slugChar'];
 		$oldOptions['postType'] = $input['postType'];
+        $oldOptions['filter-comment'] = $input['filter-comment'];
         $oldOptions['rel'] = sanitize_text_field( $input['rel'] );
 		return $oldOptions;
 	}

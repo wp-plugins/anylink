@@ -10,23 +10,33 @@ class al_filter {
 		$this -> redirectType = $anylinkOptions['redirectType'];
         $this -> rel = $anylinkOptions['rel'];
 	}
-	//@post_id: get all links and slugs of a specified post
-	public function getAllLnks( $post_id ) {
+    /**
+     * Get all links belongd to the specified post or comment
+     * 
+     * @param int $post_id the id of the post
+     * @param int $cimment_id the id of the comment, default 0, means it's a post rather than a comment
+     * @since 0.1.9
+     */
+	public function getAllLnks( $id, $is_comment = false ) {
 		$arrURL = array();
 		global $wpdb;
+        if( !$is_comment )
+            $column = 'I.al_post_id';
+        else
+            $column = 'I.al_comm_id';
 		$arrURL = $wpdb -> get_results( $wpdb -> prepare( 
 			"
 			SELECT U.al_id, U.al_slug,U.al_origURL 
 			FROM " . ANYLNK_DBINDEX . " I
 			LEFT JOIN " . ANYLNK_DBTB . " U
 			ON I.al_url_id = U.al_id
-			WHERE I.al_post_id = %d",
-			$post_id
+			WHERE " . $column . "= %d",
+			$id
 		), ARRAY_A );
 		return $arrURL;
 	}
 	//restore all URL
-	private function replaceURL( $matches ) {
+	public function replaceURL( $matches ) {
 		$U2S = $this -> arrU2S;
 		$siteURL = home_url();
         //$matches[2], $matches[5] already have key names: URL and rel
@@ -57,10 +67,15 @@ class al_filter {
 			return implode( '', $matches );
         }
 	}
-	public function applyFilter( $content ) {
+    /**
+     * Filter all external links which are exist in database
+     * 
+     * @param String $content is the content which cotains external link(s)
+     * @return string $content 
+     */
+	public function applyFilter( $content, $id, $is_comment = false ) {
 		global $wp_query, $wp_rewrite;
-		$post_id = get_the_id();
-		$arrUrlSlug = $this -> getAllLnks( $post_id );
+		$arrUrlSlug = $this -> getAllLnks( $id, $is_comment );
 		if( $arrUrlSlug ) {
 			foreach( $arrUrlSlug as $arrSlugs ) {
 				$this -> arrU2S[$arrSlugs['al_origURL']] = $this -> getInternalLinkBySlug( $arrSlugs['al_slug'] );
@@ -128,6 +143,24 @@ class al_filter {
 		), ARRAY_A );
 		return $arrSlug;
 	}
+    /**
+     * 通过URL地址查找对应的slug
+     * 
+     * @param string $url 给定的链接
+     * @return arrary $arr_slug 返回查找到的数组
+     * @since 0.2
+     */
+    public function get_slug_by_url( $url ) {
+        global $wpdb;
+        $arr_slug = array();
+        $arr_slug = $wpdb -> get_row( $wpdb -> prepare( 
+            "SELECT *
+            FROM " . ANYLNK_DBTB ." 
+            WHERE al_origURL = %s",
+            $url
+        ), ARRAY_A );
+        return $arr_slug;
+    }
 	
 	public function getInternalLinkBySlug( $slug ) {
 		global $wp_rewrite;

@@ -6,7 +6,7 @@ class al_covert {
 	public function arrGetPostIDs() {
 		global $wpdb;
 		$arrPostIDs = array();
-			$arrPostIDs += $wpdb -> get_col( $wpdb -> prepare( 
+			$arrPostIDs = $wpdb -> get_col( $wpdb -> prepare( 
 				"SELECT ID 
 				FROM " . $wpdb -> prefix . "posts 
 				WHERE post_type <> %s",
@@ -14,6 +14,18 @@ class al_covert {
 			));
 		return $arrPostIDs;
 	}
+    public function get_all_comments(){
+        global $wpdb;
+        $all_comment_IDs = array();
+        $all_comment_IDs = $wpdb -> get_col( $wpdb -> prepare( 
+            "SELECT comment_ID 
+            FROM " . $wpdb -> prefix . "comments 
+            WHERE comment_approved = %d",
+            1
+        ));
+        return $all_comment_IDs;
+    }
+    
 	public function arrGetAllLnks( $content ) {
 		$pattern = '/(?<=href=["\'])https?:\/\/[^"\']+/i';
 		preg_match_all($pattern, $content, $matches);
@@ -65,7 +77,7 @@ class al_covert {
 		}
 		return $urlIDs;
 	}
-	public function storeRel ( $post_id, $arrUrlIDs ) {
+	public function storeRel ( $post_id, $arrUrlIDs, $comment_id = 0 ) {
 		global $wpdb;
 		$arrOldIndex = array();
 		//some links may be deleted after your editing the post
@@ -74,8 +86,10 @@ class al_covert {
 		$arrOldRel = $wpdb -> get_results( $wpdb -> prepare( 
 						"SELECT al_url_id
 						FROM " . ANYLNK_DBINDEX . " 
-						WHERE al_post_id = %d",
-						$post_id 
+						WHERE al_post_id = %d 
+                        AND al_comm_id = %d",
+						$post_id, 
+                        $comment_id
 						), ARRAY_A );
 		foreach( $arrOldRel as $oldRel ){
 			foreach( $oldRel as $urlID ){
@@ -94,10 +108,12 @@ class al_covert {
 								array( 
 									'al_url_id'   => $urlID,
 									'al_post_id'  => $post_id,
+                                    'al_comm_id'  => $comment_id,
 									),
 								array( 
 									'%d',
 									'%d',
+                                    '%d',
 									)
 								);
 			}
@@ -108,10 +124,12 @@ class al_covert {
 								array(
 									'al_url_id'  => $urlID,
 									'al_post_id' => $post_id,
+                                    'al_comm_id' => $comment_id,
 									),
 								array(
 									'%d',
 									'%d',
+                                    '%d',
 									)
 								);
 			}
@@ -142,17 +160,38 @@ class al_covert {
 						array('%s', '%d')
 						);
 	} //end regenerateSlugByID
-	public function covertURLs( $id ) {
-		$thePost = get_post( $id,  ARRAY_A );
-		$content = $thePost['post_content']; //get post content
-		$arrURLs = array();
-		$arrIDs  = array();
-		$arrURLs = $this -> arrGetAllLnks( $content );
-		$arrURLs = $this -> filterLocalURL( $arrURLs );
-		if( empty( $arrURLs ) )
-			return;
-		$arrIDs  = $this -> storeExtLnks( $arrURLs );
-		$this -> storeRel( $id, $arrIDs );
+	public function covertURLs( $id, $comment = false) {
+	   //if this is a post
+        if( !$comment ) {
+            $thePost = get_post( $id,  ARRAY_A );
+            $content = $thePost['post_content']; //get post content
+            $arrURLs = array();
+            $arrIDs  = array();
+            $arrURLs = $this -> arrGetAllLnks( $content );
+            $arrURLs = $this -> filterLocalURL( $arrURLs );
+            if( empty( $arrURLs ) )
+            	return;
+            $arrIDs  = $this -> storeExtLnks( $arrURLs );
+            $this -> storeRel( $id, $arrIDs );
+        } else { //if this is a comment
+            $the_comment = get_comment( $id, ARRAY_A );
+            $comment_body = $the_comment['comment_content'];
+            $comment_post_id = $the_comment['comment_post_ID'];
+            $comment_body_urls = $this -> arrGetAllLnks( $comment_body );   //get all urls in comment body
+            //if comment author's homepage url is not empty
+            //add it to the array of urls
+            if( !empty( $the_comment['comment_author_url'] ) ) {
+                array_push( $comment_body_urls, $the_comment['comment_author_url'] );
+                $comment_urls = array_unique( $comment_body_urls );
+            }
+            if( empty( $comment_urls ) )
+                return;
+            $comment_urls = $this -> filterLocalURL( $comment_urls );  //filte local urls
+            if( empty ( $comment_urls ) )
+                return;
+            $comment_url_IDs = $this -> storeExtLnks( $comment_urls ); //insert all external links into data table and get IDs
+            $this -> storeRel( $comment_post_id, $comment_url_IDs, $id );
+        }
 	}
 }
 ?>
