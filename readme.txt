@@ -4,7 +4,7 @@ Donate link: http://dudo.org/
 Tags: seo, link sanitize, covert external links to internal links
 Requires at least: 3.4
 Tested up to: 4.2.2
-Stable tag: 0.2.1
+Stable tag: 0.2.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -43,7 +43,7 @@ external links.
 
 == Changelog ==
 
-= 0.2.1=
+= 0.2.2=
 *   修复了使用第三方编辑器（如 UEditor）时造成的链接不能转换问题
 *   修复了在PHP5.5下出现的代码中断问题
 
