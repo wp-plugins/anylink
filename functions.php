@@ -140,7 +140,7 @@ function anylnkInstall() {
         if( (float )$al_option['version'] < 19 ) {
             global $wp_rewrite;
             $wp_rewrite -> flush_rules( true );
-			add_rewrite_rule( "$cat/([0-9a-z]{4,})/?$", 'index.php?' . $al_option['redirectCat'] . '=$matches[1]', 'top' );
+			add_rewrite_rule( '$cat/([0-9a-z]{4,})/?$', 'index.php?' . $al_option['redirectCat'] . '=$matches[1]', 'top' );
 			flush_rewrite_rules();
             $al_option['version'] = 19;
             update_option( 'anylink_options', $al_option );
