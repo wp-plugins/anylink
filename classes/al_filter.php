@@ -44,6 +44,11 @@ class al_filter {
         //$mathes[0]  is the full matched string, delete it to use implode later
         array_shift( $matches );
 		//only replace the links which have slugs, or return the original URL
+        //Since 0.2.1
+        //UEditor神经病，会把wordpress已经转义的&amp;再还原成&，导致字符串比较出现问题，因此要再再次还原
+        if(function_exists('enable_ueditor') && strpos($matches['URL'],'&#038;') !== false){
+            $matches['URL'] = str_replace('&#038;','&',$matches['URL']);
+        }
 		if( array_key_exists( $matches['URL'], $U2S ) ) {
             $matches['URL'] = $U2S[$matches['URL']];
             //if need set rel manually

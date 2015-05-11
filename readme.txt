@@ -3,14 +3,16 @@ Contributors: SivaDu
 Donate link: http://dudo.org/
 Tags: seo, link sanitize, covert external links to internal links
 Requires at least: 3.4
-Tested up to: 3.9
-Stable tag: 0.2
+Tested up to: 4.2.2
+Stable tag: 0.2.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 AnyLink is a Wordpress plugin which allow you to customise you external link like an internal one.
 
 == Description ==
+
+Anylink 是一款链接转换插件，它可以把长链接转换成短链接，也可以将外部链接转换成内部链接，同时还可以隐藏真实的链接地址。它不会修改wordpress自带的数据库，也不会修改文章中的任何内容，无论什么时候都不会影响到你数据的完整性。是同类软件中安全性较高、方便灵活的轻量级软件。
 
 Anylink allows you to covert the external links in your Wordpress to internal links. Of course, it's automatically. It's advantage
 is that Anylink Plugin doesn't destroy your data in Wordpress, which means once you removed it, you needn't do anything to your 
@@ -40,6 +42,10 @@ external links.
 3. Scan all your post for the first time.
 
 == Changelog ==
+
+= 0.2.1=
+*   修复了使用第三方编辑器（如 UEditor）时造成的链接不能转换问题
+*   修复了在PHP5.5下出现的代码中断问题
 
 = 0.2 =
 *   增加了对评论中出现的链接的转换

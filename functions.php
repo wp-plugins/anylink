@@ -75,7 +75,7 @@ function anylnkInstall() {
 		if( ! empty( $wpdb->charset ) )
 		$charset_collate = "DEFAULT CHARACTER SET $wpdb->charset";
 		if( ! empty( $wpdb->collate ) )
-		$charset_collate .= " COLLATE $wpdb -> collate";
+		$charset_collate = $charset_collate . " COLLATE $wpdb->collate";
 	}
 	$sqlAnylnk = "CREATE TABLE " . ANYLNK_DBTB . " (
 		al_id mediumint(8) NOT NULL AUTO_INCREMENT,
