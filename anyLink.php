@@ -1,9 +1,9 @@
-<?php
+﻿<?php
 /**
 Plugin Name: anyLink
 Plugin URI: http://dudo.org/anylink
 Description: Anylink 是一款链接转换插件，它可以把长链接转换成短链接，也可以将外部链接转换成内部链接，同时还可以隐藏真实的链接地址。Anylink针对搜索引擎进行了专门的SEO处理，可以有效防止网站权重对外传递。同时它不会修改wordpress自带的数据库，也不会修改文章中的任何内容，无论什么时候都不会影响到你数据的完整性。是同类插件中安全性较高、方便灵活的轻量级插件。
-Version: 0.2.2
+Version: 0.2.3
 Author: dudo
 Author URI: http://dudo.org/about
 License: GPL2 or later
